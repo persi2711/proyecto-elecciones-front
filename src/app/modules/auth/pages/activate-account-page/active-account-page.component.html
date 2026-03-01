@@ -1,0 +1,30 @@
+<div class="flex flex-col items-center text-center space-y-6 py-4">
+  <div class="sm:hidden h-14"></div>
+
+  <div class="flex flex-col items-center text-center space-y-6">
+    <div
+      class="w-24 h-24 bg-green-50 text-green-600 rounded-full flex items-center justify-center shadow-sm relative"
+    >
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+    </div>
+
+    <div class="min-h-[120px] flex flex-col justify-center">
+      <h1 class="text-2xl font-bold text-neutral-800 tracking-tight">¡Cuenta Activada!</h1>
+      <p class="text-neutral-500 mt-2 max-w-xs mx-auto">
+        Tu correo ha sido verificado correctamente. Ya puedes disfrutar de todas las funciones.
+      </p>
+      <p class="text-primary font-medium mt-4 transition-all duration-300 transform scale-110">
+        Redirigiendo en <span class="text-xl font-bold">{{ countdown() }}</span> segundos...
+      </p>
+    </div>
+
+    <div class="flex flex-col w-full gap-3 pt-6">
+      <button mat-button routerLink="/auth/login" class="text-neutral-500">
+        Ir a la página principal ahora
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="min-h-screen flex sm:items-center justify-center sm:bg-[#f9fafb] bg-white px-0 sm:px-4">
+  <mat-card
+    class="w-full sm:max-w-md sm:p-8 p-6 sm:rounded-2xl rounded-none sm:shadow-xl shadow-none sm:border border-neutral-200 min-h-screen sm:min-h-0 flex flex-col bg-white"
+  >
+    <div class="sm:hidden h-14"></div>
+
+    <div class="flex flex-col items-center mb-8">
+      <div class="flex items-center justify-center">
+        <img
+          src="/images/app-logo.png"
+          alt="Logo de la aplicación"
+          class="w-32 h-32 object-contain"
+        />
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-card>
+</div>

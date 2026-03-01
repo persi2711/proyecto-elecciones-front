@@ -1,0 +1,28 @@
+/* 1. Mantenemos tu transparencia */
+:host ::ng-deep .mat-stepper-horizontal,
+:host ::ng-deep .mat-horizontal-content-container,
+:host ::ng-deep .mat-horizontal-stepper-wrapper {
+  background-color: transparent !important;
+}
+
+/* 2. El punto crítico: Forzar visibilidad y altura automática en el contenido */
+:host ::ng-deep .mat-horizontal-stepper-content {
+  background-color: white !important;
+  transform: none !important;
+  transition: none !important;
+
+  /* Esto evita que se corte al cambiar */
+  margin-bottom: 1px;
+
+  overflow: visible !important; /* Fundamental para que no se corte */
+}
+
+/* 3. Evitar que el contenedor de la animación (el que se mueve) oculte contenido */
+:host ::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+/* 4. IMPORTANTE: Ocultar los pasos que NO están activos de forma limpia */
+:host ::ng-deep .mat-horizontal-stepper-content[aria-expanded='false'] {
+  display: none !important; /* Si no es el paso actual, que desaparezca por completo */
+}

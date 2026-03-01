@@ -1,0 +1,158 @@
+<div class="w-full max-w-3xl mx-auto">
+  <div class="bg-white sm:rounded-2xl sm:shadow-xl sm:border border-neutral-200 p-6 sm:p-8 h-auto">
+    <mat-horizontal-stepper linear class="w-full">
+      <!-- STEP 1: Información General -->
+      <mat-step [stepControl]="generalInfoForm">
+        <form [formGroup]="generalInfoForm" class="space-y-4 pt-4">
+          <h2 class="text-lg font-semibold">Información personal</h2>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Apellido paterno</mat-label>
+            <input matInput formControlName="apellidoP" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Apellido materno (opcional)</mat-label>
+            <input matInput formControlName="apellidoM" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Género</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option value="MALE">Masculino</mat-option>
+              <mat-option value="FEMALE">Femenino</mat-option>
+              <mat-option value="OTHER">Otro</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="flex justify-end">
+            <button mat-raised-button color="primary" matStepperNext>Continuar</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- STEP 2: Información de Contacto -->
+      <mat-step [stepControl]="userForm">
+        <form [formGroup]="userForm" class="space-y-4 pt-4">
+          <h2 class="text-lg font-semibold">Información de contacto</h2>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Sección</mat-label>
+            <input
+              matInput
+              formControlName="sector"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              placeholder="Ej. 1234"
+              (keypress)="onlyNumbers($event)"
+            />
+
+            @if (userForm.get('sector')?.hasError('required')) {
+              <mat-error>La sección es obligatoria</mat-error>
+            }
+            @if (userForm.get('sector')?.hasError('pattern')) {
+              <mat-error>Solo se permiten números</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Teléfono (opcional)</mat-label>
+            <input matInput formControlName="telefono" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Municipio</mat-label>
+            <mat-select formControlName="state">
+              @for (municipio of municipios; track municipio) {
+                <mat-option [value]="municipio">{{ municipio }}</mat-option>
+              }
+            </mat-select>
+
+            @if (userForm.get('state')?.hasError('required')) {
+              <mat-error>El municipio es obligatorio</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="flex justify-between">
+            <button mat-stroked-button matStepperPrevious>Volver</button>
+            <button mat-raised-button color="primary" matStepperNext>Continuar</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- STEP 3: Información de la Cuenta -->
+      <mat-step [stepControl]="accountForm">
+        <form [formGroup]="accountForm" class="space-y-4 pt-4">
+          <h2 class="text-lg font-semibold">Información de la cuenta</h2>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+          @if (provider() === 'application') {
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Contraseña</mat-label>
+              <input matInput type="password" formControlName="password" />
+
+              @if (
+                accountForm.get('password')?.hasError('pattern') ||
+                accountForm.get('password')?.hasError('minlength')
+              ) {
+                <mat-error
+                  >Debe incluir mayúsculas, minúsculas, números y Mínimo 8 caracteres</mat-error
+                >
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Confirmar contraseña</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="confirmPassword"
+                [errorStateMatcher]="matcher"
+              />
+
+              @if (accountForm.hasError('passwordMismatch')) {
+                <mat-error>Las contraseñas no coinciden</mat-error>
+              }
+            </mat-form-field>
+          }
+
+          <div class="">
+            <mat-checkbox formControlName="acceptTerms" color="primary" class="text-sm">
+              Acepto la
+              <a href="#" class="text-primary hover:underline font-medium"
+                >política de privacidad</a
+              >
+              y los
+              <a href="#" class="text-primary hover:underline font-medium">términos y condiciones</a
+              >.
+            </mat-checkbox>
+
+            @if (
+              accountForm.get('acceptTerms')?.invalid && accountForm.get('acceptTerms')?.touched
+            ) {
+              <p class="text-red-600 text-xs ml-8 mt-1">
+                Debes aceptar los términos para continuar
+              </p>
+            }
+          </div>
+
+          <div class="flex justify-between">
+            <button mat-stroked-button matStepperPrevious>Volver</button>
+            <button mat-raised-button color="primary" type="button" (click)="submit()">
+              Finalizar registro
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

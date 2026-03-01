@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html {
+  // 1. Usamos una paleta base (como Blue) para que Angular genere la estructura
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$blue-palette,
+        tertiary: mat.$azure-palette,
+        theme-type: light,
+      ),
+      typography: Inter,
+      density: 0,
+    )
+  );
+
+  // 2. SOBRESCRIBIMOS los tokens con tu azul institucional
+  // Aquí es donde ocurre la magia sin usar funciones inexistentes
+  @include mat.theme-overrides(
+    (
+      primary: #1e40af,
+      on-primary: #ffffff,
+      primary-container: #ffffff,
+      // Un azul muy claro ( Tailwind blue-100)
+      on-primary-container: #1e40af,
+
+      // Si quieres cambiar el color de los campos de texto al hacer focus
+      primary-fixed: #1e40af,
+      outline: #1e40af,
+    )
+  );
+
+  @include mat.system-classes();
+}
+
+// 3. Tailwind y Globales
+@import 'tailwindcss';
+
+body {
+  margin: 0;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-family: Inter, sans-serif;
+}
+
+// 4. Overrides de componentes (como el que querías para la card)
+html {
+  @include mat.card-overrides(
+    (
+      elevated-container-shape: 16px,
+    )
+  );
+}
+.alert-success {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #16a34a,
+      supporting-text-color: #ffffff,
+      button-color: #ffffff,
+      container-shape: 12px,
+    )
+  );
+}
+
+/* Sobrescribir SnackBars de Error */
+.alert-error {
+  @include mat.snack-bar-overrides(
+    (
+      container-color: #dc2626,
+      supporting-text-color: #ffffff,
+      button-color: #ffffff,
+      container-shape: 12px,
+    )
+  );
+}

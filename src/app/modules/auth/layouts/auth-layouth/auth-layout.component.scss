@@ -1,0 +1,6 @@
+mat-card {
+  /* Forzamos que el fondo sea blanco puro y no el del tema de Material */
+  background-color: white !important;
+  /* Quitamos cualquier borde nativo de Material para usar el de Tailwind */
+  border: none !important;
+}

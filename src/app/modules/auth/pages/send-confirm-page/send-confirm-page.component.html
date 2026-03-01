@@ -1,0 +1,86 @@
+<div class="flex flex-col items-center text-center space-y-6 py-4">
+  <div class="w-20 h-20 bg-primary-50 text-primary rounded-full flex items-center justify-center">
+    @if (loading()) {
+      <span class="animate-spin text-3xl">⏳</span>
+    } @else if (emailSent()) {
+      <div class="flex items-center justify-center py-4">
+        <svg class="mail-icon-mega" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <path
+            class="mail-body"
+            d="M4 20h56v32H4z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <path
+            class="mail-lines"
+            d="M4 20l28 19 28-19"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <path
+            class="mail-flap"
+            d="M4 20l28-18 28 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    } @else {
+      <div
+        class="w-24 h-24 bg-red-50 text-red-500 rounded-full flex items-center justify-center shadow-sm animate-shake"
+      >
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          />
+        </svg>
+      </div>
+    }
+  </div>
+
+  <div class="min-h-[80px]">
+    @if (loading()) {
+      <h1 class="text-2xl font-bold text-neutral-800">Enviando...</h1>
+      <p class="text-neutral-600">Estamos procesando tu solicitud.</p>
+    } @else if (emailSent()) {
+      <h1 class="text-2xl font-bold text-neutral-800">¡Todo listo!</h1>
+      <p class="text-neutral-600 max-w-xs mx-auto">
+        El correo de confirmación ha sido enviado a tu bandeja de entrada. No olvides revisar
+        correos no desados
+      </p>
+    } @else {
+      <h1 class="text-2xl font-bold text-red-600">Algo salió mal</h1>
+      <p class="text-neutral-600 max-w-xs mx-auto">
+        No pudimos enviar el correo. Por favor, intenta de nuevo volviendo a iniciar sesion.
+      </p>
+    }
+  </div>
+
+  <div class="flex flex-col w-full gap-3 pt-4">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="loading() || cooldownSeconds() > 0"
+      (click)="sendEmail()"
+    >
+      @if (cooldownSeconds() > 0) {
+        Reintentar en {{ cooldownSeconds() }}s
+      } @else {
+        {{ emailSent() ? 'Reenviar correo' : 'Intentar de nuevo' }}
+      }
+    </button>
+
+    @if (!loading()) {
+      <button mat-button routerLink="/auth/login" class="text-neutral-500">Volver al inicio</button>
+    }
+  </div>
+</div>

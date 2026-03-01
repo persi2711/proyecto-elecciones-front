@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+  <!-- Google -->
+  <app-google-button></app-google-button>
+  <div class="flex items-center gap-3">
+    <mat-divider class="flex-1"></mat-divider>
+    <span class="text-sm text-neutral-500">o</span>
+    <mat-divider class="flex-1"></mat-divider>
+  </div>
+
+  <!-- Email -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput type="email" formControlName="email" />
+
+    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+      <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- Primary CTA -->
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-full h-11 rounded-xl"
+    [disabled]="form.invalid"
+  >
+    Continuar
+  </button>
+
+  <!-- Divider -->
+</form>
+
+<!-- Disclaimer -->
+<p class="text-xs text-neutral-500 text-center mt-6 leading-relaxed px-2">
+  Al crear una cuenta, aceptas nuestros
+  <a routerLink="/terms" class="text-primary-600 hover:underline underline-offset-4">
+    Términos y Condiciones
+  </a>
+  y nuestra
+  <a routerLink="/privacy" class="text-primary-600 hover:underline underline-offset-4">
+    Política de Privacidad </a
+  >.
+</p>
+
+<!-- Back to login -->
+<div class="text-center mt-6 text-sm text-neutral-600">
+  ¿Ya tienes cuenta?
+  <a
+    routerLink="/auth"
+    class="text-primary-600 font-medium hover:text-primary-700 hover:underline underline-offset-4 transition"
+  >
+    Iniciar sesión
+  </a>
+</div>

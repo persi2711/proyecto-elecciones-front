@@ -1,0 +1,73 @@
+.mail-icon-mega {
+  width: 120px; /* Tamaño mucho más grande */
+  height: 120px;
+  color: #3b82f6; /* Tu color primario */
+  /* Animación de entrada sutil */
+  animation: scale-up 0.5s ease-out forwards;
+}
+
+/* Dibujado de las líneas (una sola vez) */
+.mail-body,
+.mail-lines,
+.mail-flap {
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+  animation: draw-once 0.8s ease-out forwards;
+}
+
+/* Animación de la solapa: se dibuja y luego se cierra */
+.mail-flap {
+  transform-origin: 32px 20px;
+  animation:
+    draw-once 0.6s ease-out 0.2s forwards,
+    close-flap-once 0.5s ease-in-out 1s forwards;
+}
+
+@keyframes draw-once {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes close-flap-once {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(-1.1) translateY(-2px);
+  }
+}
+.animate-shake {
+  animation: shake-error 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake-error {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

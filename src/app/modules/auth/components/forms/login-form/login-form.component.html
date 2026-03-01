@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+  <app-google-button></app-google-button>
+  <!-- Divider -->
+  <div class="flex items-center gap-3">
+    <mat-divider class="flex-1"></mat-divider>
+    <span class="text-sm text-neutral-500">o</span>
+    <mat-divider class="flex-1"></mat-divider>
+  </div>
+  <!-- Email -->
+  <mat-form-field appearance="outline" class="w-full rounded-lg">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput type="email" formControlName="email" />
+
+    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+      <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- Password -->
+  <mat-form-field appearance="outline" class="w-full rounded-lg">
+    <mat-label>Contraseña</mat-label>
+
+    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+
+    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+      <mat-icon>
+        {{ hidePassword ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+    </button>
+
+    @if (form.get('password')?.invalid && form.get('password')?.touched) {
+      <mat-error>Mínimo 6 caracteres</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- Forgot password -->
+  <div class="text-right -mt-6">
+    <button
+      routerLink="/forgot-password"
+      class="text-sm text-primary-600 hover:text-primary-700 hover:underline underline-offset-4 transition cursor-pointer"
+    >
+      ¿Olvidaste tu contraseña?
+    </button>
+  </div>
+
+  <!-- Primary Button -->
+  <button
+    mat-raised-button
+    color="primary"
+    class="w-full h-11 rounded-xl"
+    [disabled]="form.invalid"
+  >
+    Iniciar Sesion
+  </button>
+
+  <!-- Google Button (estilo correcto y sobrio) -->
+</form>
+
+<!-- Register -->
+<div class="text-center mt-8 text-sm text-neutral-600">
+  ¿No tienes cuenta?
+  <a
+    routerLink="/auth/register"
+    class="text-primary-600 font-medium hover:text-primary-700 hover:underline underline-offset-4 transition cursor-pointer"
+  >
+    Crear cuenta
+  </a>
+</div>
