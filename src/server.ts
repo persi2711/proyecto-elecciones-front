@@ -50,15 +50,16 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
+  // 1. Convertimos a número obligatoriamente
   const port = Number(process.env['PORT']) || 4000;
 
+  // 2. Escuchamos en 0.0.0.0 (VITAL para Docker/Railway)
   app.listen(port, '0.0.0.0', (error: any) => {
-    // Añadimos : any al error por si acaso
     if (error) {
-      console.error('Error al iniciar el servidor:', error);
-      throw error;
+      console.error('ERROR AL ARRANCAR:', error);
+      return;
     }
-    console.log(`Node Express server listening on http://0.0.0.0:${port}`);
+    console.log(`SERVIDOR OK: Escuchando en el puerto ${port}`);
   });
 }
 
