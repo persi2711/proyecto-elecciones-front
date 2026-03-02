@@ -5,23 +5,24 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copiamos todo (incluyendo la carpeta src)
 COPY . .
 
-# Ejecutamos el build de producción
+# Generamos el build de producción
 RUN npm run build -- --configuration production
 
 # Etapa 2: Ejecución (SSR)
 FROM node:20-alpine
 WORKDIR /app
 
-# Copiamos lo que generó el build
+# Copiamos la carpeta dist completa
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/package*.json ./
 
+# Instalamos solo dependencias de producción
 RUN npm install --omit=dev
 
+# Exponemos el puerto para Railway
 EXPOSE 4000
 
-# IMPORTANTE: Verifica que el nombre de la carpeta en dist sea "proyecto-elecciones"
-CMD ["node", "dist/proyecto-elecciones/server/main.server.mjs"]
+# RUTA EXACTA (Asegúrate de que ProyectoElecciones tenga las mayúsculas correctas)
+CMD ["node", "dist/ProyectoElecciones/server/main.server.mjs"]
