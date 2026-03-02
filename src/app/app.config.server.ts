@@ -10,9 +10,10 @@ const serverConfig: ApplicationConfig = {
     {
       provide: APP_CONFIG,
       useValue: {
-        apiBaseUrl: process.env['http://localhost:3000/api/'],
+        apiBaseUrl: process.env['API_BASE_URL'] || 'http://localhost:3000/api/',
         googleAuthOToken:
-          process.env['169929030492-2e8f30dqlrsrr49ttrf34bv5530na4n7.apps.googleusercontent.com'],
+          process.env['GOOGLE_AUTH_TOKEN'] ||
+          '169929030492-2e8f30dqlrsrr49ttrf34bv5530na4n7.apps.googleusercontent.com',
       },
     },
   ],

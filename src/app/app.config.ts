@@ -6,6 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { APP_CONFIG } from './shared/tokens/app-config-token.token';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './shared/interceptors/sesion-token.interceptor';
+import { environment } from './environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,9 +17,8 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_CONFIG,
       useValue: {
-        apiBaseUrl: 'http://localhost:3000/api/',
-        googleAuthOToken:
-          '169929030492-2e8f30dqlrsrr49ttrf34bv5530na4n7.apps.googleusercontent.com',
+        apiBaseUrl: environment.apiBaseUrl,
+        googleAuthOToken: environment.googleAuthOToken,
       },
     },
     provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
