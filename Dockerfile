@@ -25,4 +25,4 @@ RUN npm install --omit=dev
 EXPOSE 4000
 
 # RUTA EXACTA (Asegúrate de que ProyectoElecciones tenga las mayúsculas correctas)
-CMD ["node", "dist/ProyectoElecciones/server/main.server.mjs"]
+CMD ["npm", "run", "serve:ssr"]
