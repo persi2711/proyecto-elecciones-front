@@ -60,7 +60,7 @@ export const AuthRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '', // Regresa a la raíz de auth (Login)
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];

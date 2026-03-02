@@ -3,7 +3,6 @@
 @include mat.core();
 
 html {
-  // 1. Usamos una paleta base (como Blue) para que Angular genere la estructura
   color-scheme: light;
 
   @include mat.theme(
@@ -18,17 +17,14 @@ html {
     )
   );
 
-  // 2. SOBRESCRIBIMOS los tokens con tu azul institucional
-  // Aquí es donde ocurre la magia sin usar funciones inexistentes
   @include mat.theme-overrides(
     (
       primary: #1e40af,
       on-primary: #ffffff,
       primary-container: #ffffff,
-      // Un azul muy claro ( Tailwind blue-100)
+
       on-primary-container: #1e40af,
 
-      // Si quieres cambiar el color de los campos de texto al hacer focus
       primary-fixed: #1e40af,
       outline: #1e40af,
     )
@@ -37,7 +33,6 @@ html {
   @include mat.system-classes();
 }
 
-// 3. Tailwind y Globales
 @import 'tailwindcss';
 
 body {
@@ -47,7 +42,6 @@ body {
   font-family: Inter, sans-serif;
 }
 
-// 4. Overrides de componentes (como el que querías para la card)
 html {
   @include mat.card-overrides(
     (
@@ -66,7 +60,6 @@ html {
   );
 }
 
-/* Sobrescribir SnackBars de Error */
 .alert-error {
   @include mat.snack-bar-overrides(
     (

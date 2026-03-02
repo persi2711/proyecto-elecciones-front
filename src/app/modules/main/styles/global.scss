@@ -1,0 +1,55 @@
+.btn {
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+  display: inline-block;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &-primary {
+    @extend .btn;
+    background: $primary-blue;
+    color: $white;
+    margin-right: 12px;
+  }
+
+  &-outline {
+    @extend .btn;
+    background: transparent;
+    color: $primary-blue;
+    border: 2px solid $primary-blue;
+  }
+
+  &-white {
+    @extend .btn;
+    background: $white;
+    color: $primary-blue;
+    font-weight: 700;
+    margin-right: 12px;
+  }
+
+  &-outline-white {
+    @extend .btn;
+    background: transparent;
+    color: $white;
+    border: 2px solid $white;
+    font-weight: 700;
+  }
+
+  &-sm-primary {
+    @extend .btn;
+    background: $primary-blue;
+    color: $white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    width: 100%;
+  }
+}

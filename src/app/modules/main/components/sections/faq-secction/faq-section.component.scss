@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.faq-section {
+  background-color: white;
+
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+
+    box-shadow: none !important;
+  }
+
+  ::ng-deep {
+    .mat-expansion-panel.faq-item {
+      background: transparent !important;
+      box-shadow: none !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      border-radius: 0 !important;
+
+      .faq-icon {
+        color: $primary-blue;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        &.rotated {
+          transform: rotate(180deg);
+        }
+      }
+
+      .mat-expansion-panel-header.faq-trigger {
+        padding: 24px 0 !important;
+        height: auto !important;
+
+        .mat-content {
+          margin-right: 16px;
+        }
+
+        .mat-expansion-panel-header-title {
+          font-weight: 700;
+          color: $slate-dark;
+          font-size: 1.1rem;
+          line-height: 1.4;
+        }
+
+        &:hover {
+          background: transparent !important;
+        }
+      }
+
+      .mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          padding: 0 0 24px 0 !important;
+          color: $slate-text;
+          font-size: 1rem;
+          line-height: 1.6;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+
+      .mat-expansion-panel-header-focus-overlay {
+        display: none !important;
+      }
+    }
+  }
+}

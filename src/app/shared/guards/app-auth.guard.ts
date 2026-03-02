@@ -7,12 +7,10 @@ export const guestGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Si el Signal tiene usuario, bloqueamos acceso a login/register
   if (authService.currentUser()) {
     return router.createUrlTree(['/']);
   }
 
-  // Si no hay usuario pero hay cookie, esperamos a que checkAuth termine (opcional)
   return true;
 };
 export const adminGuard: CanActivateFn = () => {
@@ -24,11 +22,20 @@ export const adminGuard: CanActivateFn = () => {
     return true;
   }
 
-  // Si está logueado pero no es admin, lo mandamos a su perfil
   if (user) {
     return router.createUrlTree(['/']);
   }
 
-  // Si ni siquiera hay sesión, al login
+  return router.createUrlTree(['/auth/login']);
+};
+
+export const authGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.currentUser()) {
+    return true;
+  }
+
   return router.createUrlTree(['/auth/login']);
 };

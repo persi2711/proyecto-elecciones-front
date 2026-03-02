@@ -1,0 +1,43 @@
+<section #statsSection class="stats-section">
+  <div class="section-container">
+    <div class="stats-header">
+      <h2>Nuestros resultados</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="number-wrapper">
+          @if (statsLoaded()) {
+            <span class="stat-number">+{{ postulados() }}</span>
+          } @else {
+            <div class="skeleton-loader"></div>
+          }
+        </div>
+        <span class="stat-label">Postulados</span>
+      </div>
+
+      <div class="stat-item">
+        <div class="number-wrapper">
+          @if (statsLoaded()) {
+            <span class="stat-number">+{{ (apoyos() / 1000).toFixed(1) }}k</span>
+          } @else {
+            <div class="skeleton-loader"></div>
+          }
+        </div>
+        <span class="stat-label">Apoyos Ciudadanos</span>
+      </div>
+
+      <div class="stat-item">
+        <div class="number-wrapper">
+          @if (statsLoaded()) {
+            <span class="stat-number">{{ convocatorias() }}</span>
+          } @else {
+            <div class="skeleton-loader"></div>
+          }
+        </div>
+        <span class="stat-label">Convocatorias</span>
+      </div>
+    </div>
+  </div>
+</section>

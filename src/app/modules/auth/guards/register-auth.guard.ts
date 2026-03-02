@@ -20,19 +20,14 @@ export const tokenAuthGuard: CanActivateFn = (route, state) => {
       authContextService.email.set(response.email);
       authContextService.provider.set(response.provider);
 
-      // ✅ CONDICIÓN DE SALIDA: Si el estado del usuario coincide con
-      // lo que esta ruta específica requiere, NO redirigir.
       if (response.registed === shouldBeRegistered) {
         return true;
       }
 
-      // 🔄 REDIRECCIÓN: Solo si el estado es el opuesto al que requiere la ruta
       const targetPath = response.registed
         ? `/auth/full/confirm/${token}`
         : `/auth/full/register/${token}`;
 
-      // ⚠️ IMPORTANTE: Si por algún error de lógica la ruta actual
-      // es igual a targetPath, devolvemos true para romper el ciclo.
       if (state.url.includes(targetPath)) {
         return true;
       }

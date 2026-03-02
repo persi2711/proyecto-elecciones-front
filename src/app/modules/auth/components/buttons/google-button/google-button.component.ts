@@ -12,12 +12,10 @@ import { GoogleButtonService } from '../../../../../api/endpoints/auth/google-bu
   providers: [],
 })
 export class GoogleButtonComponent {
-  private googleService = inject(GoogleButtonService); // Inyectamos tu servicio
+  private googleService = inject(GoogleButtonService);
   googleBtn = viewChild.required<ElementRef>('googleBtnContainer');
 
   constructor() {
-    // afterNextRender es perfecto para librerías de terceros (Google, Charts, etc)
-    // porque solo se ejecuta en el navegador y cuando el HTML ya existe.
     afterNextRender(() => {
       const element = this.googleBtn().nativeElement;
       this.googleService.renderGoogleButton(element);

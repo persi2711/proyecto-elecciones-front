@@ -1,0 +1,26 @@
+<section class="faq-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Preguntas Frecuentes</h2>
+    </div>
+
+    <div class="faq-list">
+      <mat-accordion multi="false" [hideToggle]="true">
+        @for (item of faqs(); track $index) {
+          <mat-expansion-panel class="faq-item" #panel>
+            <mat-expansion-panel-header class="faq-trigger">
+              <mat-panel-title>
+                {{ item.question }}
+              </mat-panel-title>
+              <mat-icon class="faq-icon" [class.rotated]="panel.expanded"> expand_more </mat-icon>
+            </mat-expansion-panel-header>
+
+            <div class="faq-answer">
+              <p>{{ item.answer }}</p>
+            </div>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+    </div>
+  </div>
+</section>

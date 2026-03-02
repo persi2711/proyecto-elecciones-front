@@ -44,7 +44,7 @@ export class SimpleAuthEndpoint {
     }>(this.url + 'send-email', { token: token });
   }
 
-  validateSesion(): Observable<UserSession> {
-    return this.http.get<UserSession>(this.url + 'me');
+  validateSesion(): Observable<{ user: UserSession; expiresAt: string }> {
+    return this.http.get<{ user: UserSession; expiresAt: string }>(this.url + 'validate-sesion');
   }
 }

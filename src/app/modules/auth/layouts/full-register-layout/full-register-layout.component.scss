@@ -5,7 +5,6 @@
   background: #f9fafb;
 }
 
-/* HEADER */
 .register-header {
   background: white;
   border-bottom: 1px solid #e5e7eb;
@@ -30,16 +29,14 @@
   color: #111827;
 }
 
-/* MAIN */
 .register-main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: stretch; // 👈 importante
+  align-items: stretch;
   padding: 2rem 1rem;
 }
 
-/* FOOTER */
 .register-footer {
   background: white;
   border-top: 1px solid #e5e7eb;

@@ -4,18 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { GoogleRegister } from '../../objects/dto/simple-register.dto';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/app-auth.service';
 
-@Injectable({ providedIn: 'root' }) // Asegúrate de que sea root
+@Injectable({ providedIn: 'root' })
 export class GoogleButtonService {
   private http = inject(HttpClient);
   private config = inject<AppConfig>(APP_CONFIG);
   private url = this.config.apiBaseUrl + 'auth/';
   private router = inject(Router);
   private zone = inject(NgZone);
+  private authService = inject(AuthService);
 
-  // 1. Inicializamos la configuración de Google (esto sí puede ir en el constructor)
   constructor() {
-    // Solo inicializamos, NO renderizamos todavía
     this.setupGoogleConfig();
   }
 
@@ -24,7 +24,6 @@ export class GoogleButtonService {
     google.accounts.id.initialize({
       client_id: this.config.googleAuthOToken,
       callback: (response: any) => {
-        // FORZAMOS a que entre de nuevo a la zona de Angular
         this.zone.run(() => {
           this.handleLogin(response.credential);
         });
@@ -32,7 +31,7 @@ export class GoogleButtonService {
       use_fedcm_for_prompt: true,
     });
   }
-  // 2. Este método lo llamará el componente pasándole su DIV
+
   renderGoogleButton(element: HTMLElement) {
     // @ts-ignore
     google.accounts.id.renderButton(element, {
@@ -49,12 +48,10 @@ export class GoogleButtonService {
       .post<{ token: string; type: 'Create' | 'Session' }>(this.url + 'google', { token: idToken })
       .subscribe({
         next: (res) => {
-          console.log('✅ ¡Callback ejecutado con éxito!');
-
           if (res.type === 'Create') {
-            // Navegamos pasando el token por parámetro si así lo tienes configurado
             this.router.navigateByUrl('/auth/full/register/' + res.token);
           } else {
+            this.authService.setSession(res.token);
             this.router.navigateByUrl('');
           }
         },

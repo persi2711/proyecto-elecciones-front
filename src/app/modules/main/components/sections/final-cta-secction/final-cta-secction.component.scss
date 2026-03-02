@@ -1,0 +1,82 @@
+@import '../../../styles/variables.scss';
+
+.final-cta {
+  background-color: $white;
+
+  .cta-box {
+    background: $primary-blue;
+    padding: 60px 40px;
+    border-radius: 32px;
+    text-align: center;
+    color: $white;
+    box-shadow: 0 20px 40px rgba($primary-blue, 0.2);
+
+    h2 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 850;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    p {
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      button {
+        min-width: 240px;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-white {
+        background: $white;
+        color: $primary-blue;
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          background: #f8fafc;
+        }
+      }
+
+      .btn-outline-white {
+        background: transparent;
+        border-color: $white;
+        color: $white;
+        &:hover {
+          background: rgba($white, 0.1);
+          transform: translateY(-3px);
+        }
+      }
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 16px;
+
+        button {
+          width: 100%;
+          min-width: unset;
+        }
+      }
+    }
+  }
+}

@@ -26,6 +26,7 @@ import {
   UserRegister,
 } from '../../../../../api/objects/dto/simple-register.dto';
 import { GoogleButtonService } from '../../../../../api/endpoints/auth/google-button.service';
+import { AuthService } from '../../../../../shared/services/app-auth.service';
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/;
 
 @Component({
@@ -54,6 +55,7 @@ export class FullRegisterFormComponent {
   private api = inject(SimpleAuthEndpoint);
   private router = inject(Router);
   private googleButtonService = inject(GoogleButtonService);
+  private authService = inject(AuthService);
   matcher = new MyErrorStateMatcher();
   accountForm = this.fb.group(
     {
@@ -82,7 +84,7 @@ export class FullRegisterFormComponent {
 
   ngOnInit() {
     this.accountForm.patchValue({ email: this.email() });
-    // Aplicar validaciones de contraseña SOLO si no es Google
+
     console.log(this.provider);
     if (this.provider() === 'application') {
       const p = this.accountForm.get('password');
@@ -102,7 +104,6 @@ export class FullRegisterFormComponent {
   }
 
   async submit() {
-    // 1. Validaciones previas
     if (this.generalInfoForm.invalid || this.userForm.invalid || this.accountForm.invalid) {
       this.markFormsAsTouched();
       this.layoutService.error('Por favor, completa todos los campos requeridos');
@@ -111,14 +112,12 @@ export class FullRegisterFormComponent {
 
     this.layoutService.showLoding();
 
-    // 2. Construcción de los datos comunes
     const user = this.userForm.getRawValue() as UserRegister;
     const generalInfo = this.generalInfoForm.getRawValue() as GeneralInfoRegister;
 
-    // 3. Lógica según el proveedor
     if (this.provider() === 'google') {
       const payload: GoogleRegister = {
-        account: { email: this.email() }, // Solo el email para Google
+        account: { email: this.email() },
         user,
         generalInfo,
       };
@@ -144,14 +143,13 @@ export class FullRegisterFormComponent {
     }
   }
 
-  // Helpers para limpiar el código
   private handleSuccess(token: string, isGoogle: boolean) {
     this.layoutService.hideLoding();
     this.layoutService.success(isGoogle ? '¡Bienvenido!' : 'Cuenta creada. Verifica tu correo.');
 
     if (isGoogle) {
-      localStorage.setItem('token', token);
-      this.router.navigate(['/dashboard']);
+      this.authService.setSession(token);
+      this.router.navigateByUrl('');
     } else {
       this.router.navigateByUrl(`/auth/full/confirm/${token}`);
     }
@@ -173,7 +171,6 @@ export class FullRegisterFormComponent {
       const password = group.get('password')?.value;
       const confirm = group.get('confirmPassword')?.value;
 
-      // Si están vacíos, que actúe el Validator.required
       if (!password || !confirm) return null;
 
       return password === confirm ? null : { passwordMismatch: true };

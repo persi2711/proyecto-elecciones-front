@@ -1,0 +1,64 @@
+<section class="featured-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="sub-badge">Voces Locales</span>
+      <h2>Representantes destacados</h2>
+      <p>Ciudadanos que ya están haciendo la diferencia.</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="nav-btn prev" (click)="scrollPrev()"><mat-icon>chevron_left</mat-icon></button>
+
+      <div
+        class="carousel-track"
+        #carouselTrack
+        (mouseenter)="stopAutoplay()"
+        (mouseleave)="startAutoplay()"
+      >
+        @if (loading()) {
+          @for (i of [1, 2, 3, 4]; track i) {
+            <div class="candidate-card skeleton">
+              <div class="card-img"></div>
+              <div class="card-info">
+                <div class="sk-line title"></div>
+                <div class="sk-line text"></div>
+                <div class="sk-line stats"></div>
+              </div>
+            </div>
+          }
+        } @else {
+          @for (user of users(); track user.id) {
+            <div class="candidate-card">
+              <div class="card-img">
+                <img [src]="user.photo" [alt]="user.name" />
+                <span class="location-badge">{{ user.city }}</span>
+              </div>
+              <div class="card-info">
+                <h4 class="text-truncate">{{ user.name }}</h4>
+                <p class="description-truncate">{{ user.bio }}</p>
+                <div class="card-stats">
+                  <mat-icon>favorite</mat-icon>
+                  <span>{{ user.votes }} Apoyos</span>
+                </div>
+              </div>
+            </div>
+          }
+
+          <div class="candidate-card view-all-card" routerLink="/representantes">
+            <div class="view-all-content">
+              <div class="icon-circle">
+                <mat-icon>group_add</mat-icon>
+              </div>
+              <h4>Ver todos los participantes</h4>
+              <p>Descubre a más ciudadanos comprometidos con Baja California.</p>
+              <span class="link-text">Explorar lista <mat-icon>arrow_forward</mat-icon></span>
+            </div>
+          </div>
+        }
+      </div>
+      <button class="nav-btn next" (click)="scrollNext()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</section>

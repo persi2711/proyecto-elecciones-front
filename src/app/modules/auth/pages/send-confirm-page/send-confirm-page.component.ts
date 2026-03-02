@@ -30,15 +30,13 @@ export class SendConfirmPageComponent implements OnInit {
   sendEmail() {
     if (this.cooldownSeconds() > 0 || this.loading()) return;
 
-    // 1. Resetear estados para la nueva petición
     this.loading.set(true);
-    this.emailSent.set(false); // Limpiamos el éxito/error previo para mostrar solo el loader
+    this.emailSent.set(false);
 
     this.api.sendEmail(this.token).subscribe({
       next: (res) => {
         this.loading.set(false);
 
-        // Si el correo se envió o estamos en cooldown, es un estado de "Éxito visual"
         if (res.emailSend || res.cooldown) {
           this.emailSent.set(true);
         }
@@ -53,7 +51,7 @@ export class SendConfirmPageComponent implements OnInit {
       },
       error: (err) => {
         this.loading.set(false);
-        // Importante: emailSent sigue en false, lo que activará el bloque de error en el HTML
+
         this.emailSent.set(false);
 
         const msg = err.error?.message || 'Error al procesar la solicitud';

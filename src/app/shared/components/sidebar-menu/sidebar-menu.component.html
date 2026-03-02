@@ -1,0 +1,36 @@
+@if (showSidebar()) {
+  <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+}
+
+<aside class="sidebar-aside">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Menú</span>
+    <button mat-icon-button (click)="closeSidebar()">
+      <mat-icon style="color: white">close</mat-icon>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    @for (route of navRoutes(); track route.path) {
+      <a
+        [routerLink]="route.path"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        class="sidebar-link"
+      >
+        @if (route.icon) {
+          <mat-icon>{{ route.icon }}</mat-icon>
+        }
+        <span>{{ route.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <footer class="sidebar-footer">
+    <div class="footer-links">
+      <a routerLink="/privacidad" (click)="layoutService.closeSidebar()">Aviso de Privacidad</a>
+      <span class="separator">•</span>
+      <a routerLink="/terminos" (click)="layoutService.closeSidebar()">Términos y Condiciones</a>
+    </div>
+  </footer>
+</aside>

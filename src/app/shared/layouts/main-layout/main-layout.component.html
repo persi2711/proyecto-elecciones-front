@@ -1,0 +1,13 @@
+<div class="layout-wrapper">
+  <app-heder [user]="currentUser()"></app-heder>
+
+  <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer></app-footer>
+
+  @defer (on timer(0)) {
+    <app-sidebar-menu></app-sidebar-menu>
+  }
+</div>

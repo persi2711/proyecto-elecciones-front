@@ -14,6 +14,7 @@ import { SimpleLoginDto } from '../../../../../api/objects/dto/simple-login-dto'
 import { LayoutService } from '../../../../../shared/services/layout.service';
 import { finalize } from 'rxjs';
 import { GoogleButtonComponent } from '../../buttons/google-button/google-button.component';
+import { AuthService } from '../../../../../shared/services/app-auth.service';
 
 @Component({
   standalone: true,
@@ -38,6 +39,7 @@ export class LoginFormComponent {
   layoutService = inject(LayoutService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private authSerive = inject(AuthService);
 
   hidePassword = true;
 
@@ -63,7 +65,9 @@ export class LoginFormComponent {
           if (!data.verified) {
             this.router.navigateByUrl('/auth/full/confirm/' + data.token);
           } else {
+            this.authSerive.setSession(data.token);
             this.layoutService.success('Inicio de sesion exitoso');
+            this.router.navigateByUrl('');
           }
         },
         error: (error) => {
@@ -73,8 +77,5 @@ export class LoginFormComponent {
       });
   }
 
-  loginWithGoogle() {
-    console.log('Login con Google');
-  }
   navigateTo() {}
 }

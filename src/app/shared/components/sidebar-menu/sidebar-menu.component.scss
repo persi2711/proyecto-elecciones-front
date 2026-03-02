@@ -1,0 +1,148 @@
+:host {
+  display: block;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sidebar-aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 1200;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+:host.sidebar-open {
+  .sidebar-aside {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}
+
+.sidebar-header {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background-color: #1e40af;
+
+  .sidebar-title {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.1rem;
+  }
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    text-decoration: none;
+    color: #475569;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    mat-icon {
+      color: #94a3b8;
+      font-size: 20px;
+    }
+
+    &.active {
+      color: #1e40af;
+      background-color: rgba(30, 64, 175, 0.1);
+      border-left: 4px solid #1e40af;
+    }
+  }
+}
+.sidebar-aside {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  background-color: #1e40af;
+  color: #ffffff;
+  padding: 4px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+    }
+
+    .separator {
+      display: none;
+    }
+  }
+
+  .copyright {
+    margin: 0;
+    font-size: 0.7rem;
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (min-height: 700px) {
+  .sidebar-footer .footer-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+    .separator {
+      display: inline;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

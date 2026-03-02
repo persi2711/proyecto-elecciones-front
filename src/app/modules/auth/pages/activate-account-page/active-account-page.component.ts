@@ -17,7 +17,7 @@ export class ActiveAccountPageComponent implements OnInit {
       this.countdown.update((v) => v - 1);
       if (this.countdown() <= 0) {
         clearInterval(interval);
-        this.router.navigateByUrl(''); // O tu ruta principal
+        this.router.navigateByUrl('');
       }
     }, 1000);
   }
