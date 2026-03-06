@@ -1,5 +1,7 @@
 import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContactModalComponent } from '../components/contact-modal/contact-modal.component';
 interface NavLink {
   label: string;
   path: string;
@@ -12,13 +14,15 @@ export class LayoutService {
   loading = this._loading.asReadonly();
   private _showSidebar = signal(false);
   showSidebar = this._showSidebar.asReadonly();
+  private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   navRoutes = signal<NavLink[]>([
-    { label: 'Incio', path: '/', icon: 'home' },
-    { label: 'Eventos', path: '/events', icon: 'home' },
-    { label: 'Partipantes', path: '/participants', icon: 'newspaper' },
-    { label: 'Sobre el proyecto', path: '/proyect', icon: 'explore' },
-    { label: 'Consejo Ciudadano', path: '/consejo ciudadano', icon: 'explore' },
+    { label: 'Incio', path: '/home', icon: 'home' },
+    { label: 'Eventos', path: '/events', icon: 'tab_group' },
+    { label: 'Participantes', path: '/participants', icon: 'groups' },
+    { label: 'Sobre el proyecto', path: '/about-project', icon: 'pageview' },
+    { label: 'Consejo Ciudadano', path: '/consejo ciudadano', icon: 'open_in_new' },
   ]);
 
   showLoding() {
@@ -28,8 +32,6 @@ export class LayoutService {
   hideLoding() {
     this._loading.set(false);
   }
-
-  private snackBar = inject(MatSnackBar);
 
   success(message: string) {
     this.snackBar.open(message, 'Cerrar', {
@@ -61,5 +63,12 @@ export class LayoutService {
   }
   closeSidebar() {
     this._showSidebar.set(false);
+  }
+
+  openContact() {
+    this.dialog.open(ContactModalComponent, {
+      width: '450px',
+      maxWidth: '90vw',
+    });
   }
 }

@@ -1,0 +1,81 @@
+@import '../../../../styles/variables.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+.content-centering {
+  max-width: 600px;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    text-align: left;
+  }
+
+  .project-header {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+
+    @media (min-width: 1024px) {
+      display: inline-flex;
+    }
+
+    .label-badge {
+      background: #dcfce7;
+      color: #166534;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-label {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: $primary-blue;
+    }
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 8vw, 4.2rem);
+    color: #0f172a;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+
+    @media (min-width: 1024px) {
+      margin-bottom: 28px;
+    }
+
+    .highlight {
+      color: $primary-blue;
+    }
+  }
+
+  .manifesto-text {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: $slate-text;
+    line-height: 1.4;
+    margin-bottom: 0;
+
+    strong {
+      color: #000;
+      border-left: 3px solid $primary-blue;
+      padding-left: 10px;
+      display: inline-block;
+      margin-top: 6px;
+
+      @media (min-width: 1024px) {
+        margin-top: 10px;
+      }
+    }
+  }
+}

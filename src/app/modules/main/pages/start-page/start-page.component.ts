@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HeroSectionComponent } from '../../components/sections/hero-section/hero-section.component';
+import { HeroSectionComponent } from '../../components/sections/hero-slider-component/hero-section.component';
 import { AboutSectionComponent } from '../../components/sections/about-section/about-section.component';
 import { ProcessSectionComponent } from '../../components/sections/process-section/process-section.component';
 import { StatsSectionComponent } from '../../components/sections/stats-section/stats-section.component';

@@ -12,17 +12,32 @@
 
   <nav class="sidebar-nav">
     @for (route of navRoutes(); track route.path) {
-      <a
-        [routerLink]="route.path"
-        routerLinkActive="active"
-        (click)="closeMenu()"
-        class="sidebar-link"
-      >
-        @if (route.icon) {
-          <mat-icon>{{ route.icon }}</mat-icon>
-        }
-        <span>{{ route.label }}</span>
-      </a>
+      @if (route.label === 'Consejo Ciudadano') {
+        <a
+          href="https://consejociudadanobc.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="closeMenu()"
+          class="sidebar-link"
+        >
+          @if (route.icon) {
+            <mat-icon>{{ route.icon }}</mat-icon>
+          }
+          <span>{{ route.label }}</span>
+        </a>
+      } @else {
+        <a
+          [routerLink]="route.path"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          class="sidebar-link"
+        >
+          @if (route.icon) {
+            <mat-icon>{{ route.icon }}</mat-icon>
+          }
+          <span>{{ route.label }}</span>
+        </a>
+      }
     }
   </nav>
 

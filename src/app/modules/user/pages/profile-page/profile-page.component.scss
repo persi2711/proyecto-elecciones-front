@@ -1,0 +1,295 @@
+@import '../../../main/styles/variables.scss';
+
+.single-column-layout {
+  max-width: 800px; // Una sola columna central
+  margin: 40px auto 80px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #334155; // Gris oscuro texto base
+}
+
+// Comunes
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0; // Gris claro
+  padding-bottom: 8px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a; // Casi negro
+  }
+  .edit-btn {
+    color: #64748b; // Gris medio
+    &:hover {
+      color: #1e40af;
+      background: #f8fafc;
+    } // Hover azul
+  }
+}
+
+.content-section,
+.split-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+// 1. IMAGEN
+.profile-header-img {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .avatar-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .status-indicator {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      background: #10b981; // Verde éxito (Público)
+      color: white;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #ffffff;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+      &.private {
+        background: #94a3b8;
+      } // Gris para privado
+    }
+
+    .edit-photo-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #ffffff;
+      color: #1e40af; // Azul primario
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// 2. NOMBRE
+.profile-name-section {
+  text-align: center;
+  margin-top: -10px;
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+  }
+}
+
+// 3. TOOLBAR
+.toolbar-section {
+  display: flex;
+  justify-content: center;
+
+  .toolbar-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #f8fafc; // Gris muy suave
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid #e2e8f0;
+
+    .tool-btn {
+      color: #475569;
+      border-radius: 20px;
+      font-weight: 600;
+      mat-icon {
+        margin-right: 6px;
+        color: #64748b;
+      }
+
+      &:hover {
+        background: #ffffff;
+        color: #1e40af;
+        mat-icon {
+          color: #1e40af;
+        }
+      }
+      &.logout:hover {
+        color: #ef4444;
+        mat-icon {
+          color: #ef4444;
+        }
+      } // Rojo solo para cerrar sesión
+    }
+  }
+}
+
+// 4. DESCRIPCIÓN
+.description-text {
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+// 5. CONTACTO Y CV
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; // Se apilan en móvil
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      mat-icon {
+        color: #94a3b8;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+      span {
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  .cv-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 120px;
+
+    .cv-file {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: #475569;
+      mat-icon {
+        color: #1e40af;
+      }
+    }
+    .blue-btn {
+      color: #1e40af;
+      border-color: #1e40af;
+    }
+  }
+}
+
+// 6. TABS TRAYECTORIA
+.tabs-section {
+  padding: 0; // El contenedor interno maneja los paddings
+  overflow: hidden;
+
+  .section-header {
+    margin: 24px 24px 0;
+    border: none;
+  }
+
+  .custom-tabs {
+    ::ng-deep .mat-mdc-tab-labels {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    ::ng-deep .mdc-tab__text-label {
+      color: #475569;
+      font-weight: 600;
+    }
+    ::ng-deep .mdc-tab-indicator__inner--theme-demo {
+      border-color: #1e40af;
+    } // Linea azul activa
+  }
+
+  .tab-content {
+    padding: 20px 24px 30px;
+  }
+
+  .add-btn {
+    width: 100%;
+    color: #1e40af;
+    margin-bottom: 20px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+  }
+
+  .lifeway-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .lw-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      h3 {
+        margin: 0 0 4px;
+        font-size: 1.1rem;
+        color: #0f172a;
+      }
+      .edit-btn {
+        margin-top: -8px;
+        margin-right: -8px;
+      }
+    }
+    .lw-meta {
+      display: block;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+
+  .empty-text {
+    text-align: center;
+    color: #94a3b8;
+    font-style: italic;
+    margin-top: 20px;
+  }
+}

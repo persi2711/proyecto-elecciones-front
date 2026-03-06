@@ -1,7 +1,7 @@
 .main-footer {
   background-color: #1e40af;
   color: #ffffff;
-  padding: 15px 24px;
+
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   .footer-container {
@@ -10,67 +10,92 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
   }
 
   .footer-brand {
     display: flex;
     align-items: center;
-    gap: 15px;
 
-    .logo-text {
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: -0.5px;
+    .footer-logo-img {
+      height: 80px; // Tamaño base
+      width: auto;
+      object-fit: contain;
+      transition: height 0.3s ease;
+
+      @media (min-width: 1024px) {
+        height: 120px; // Logo imponente en desktop
+      }
     }
+  }
 
-    .copyright {
-      font-size: 0.75rem;
-      opacity: 0.6;
+  .copyright {
+    font-size: 0.85rem; // Un poco más grande
+    opacity: 0.7;
+    white-space: nowrap;
+
+    @media (min-width: 1024px) {
+      font-size: 1rem; // Escalado para desktop
     }
   }
 
   .footer-links {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 
     a {
       color: #ffffff;
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.9rem; // Base más legible
       opacity: 0.8;
-      transition: opacity 0.2s;
+      transition: all 0.2s;
+      white-space: nowrap;
+
+      @media (min-width: 1024px) {
+        font-size: 1.1rem; // Escalado para desktop
+      }
 
       &:hover {
         opacity: 1;
+        text-decoration: underline;
       }
+    }
+    .ext-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      opacity: 0.7;
+      margin-top: -2px;
     }
 
     .dot {
-      opacity: 0.3;
-      font-size: 0.8rem;
+      opacity: 0.4;
+      font-size: 1rem;
     }
   }
 
-  @media (max-width: 600px) {
-    padding: 20px 10px;
-
+  // --- AJUSTES MÓVILES ---
+  @media (max-width: 768px) {
+    padding-bottom: 20px;
     .footer-container {
       flex-direction: column;
-      gap: 10px;
+      text-align: center;
+      gap: 5px;
+    }
+
+    .footer-logo-img {
+      height: 70px; // Más pequeño en móvil para no saturar
     }
 
     .footer-links {
-      gap: 15px;
-    }
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 20px;
 
-    .dot {
-      display: none;
+      .dot {
+        display: none;
+      }
     }
   }
-}
-
-.copyright {
-  font-size: 0.75rem;
-  opacity: 0.6;
 }

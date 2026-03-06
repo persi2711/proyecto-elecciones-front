@@ -52,7 +52,6 @@ export class GoogleButtonService {
             this.router.navigateByUrl('/auth/full/register/' + res.token);
           } else {
             this.authService.setSession(res.token);
-            this.router.navigateByUrl('');
           }
         },
         error: (err) => {

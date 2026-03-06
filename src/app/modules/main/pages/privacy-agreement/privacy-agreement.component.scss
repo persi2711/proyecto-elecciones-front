@@ -1,0 +1,117 @@
+@import '../../styles/variables.scss';
+.legal-page {
+  background-color: #f1f5f9; // Fondo gris suave para resaltar el "documento"
+  padding: 100px 20px 60px;
+  min-height: 100vh;
+
+  .legal-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: $white;
+    padding: 50px 80px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+
+    @media (max-width: 768px) {
+      padding: 30px 25px;
+      border-radius: 0;
+    }
+  }
+
+  .legal-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 20px;
+
+    .update-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 10px;
+    }
+  }
+
+  .legal-content {
+    section {
+      margin-bottom: 32px;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: $primary-blue;
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #334155;
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+
+      .sub-title {
+        font-weight: 800;
+        margin-top: 24px;
+        color: #0f172a;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin-bottom: 16px;
+
+        li {
+          font-size: 1rem;
+          color: #334155;
+          margin-bottom: 12px;
+          line-height: 1.6;
+
+          strong {
+            color: #0f172a;
+          }
+        }
+      }
+
+      a {
+        color: $primary-blue;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px solid rgba($primary-blue, 0.3);
+
+        &:hover {
+          border-bottom-color: $primary-blue;
+        }
+      }
+    }
+  }
+
+  .legal-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+
+    .btn-return {
+      background: $primary-blue;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: darken($primary-blue, 10%);
+      }
+    }
+  }
+}

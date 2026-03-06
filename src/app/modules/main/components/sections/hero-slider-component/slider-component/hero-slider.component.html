@@ -1,0 +1,40 @@
+<div class="carril-base">
+  <div class="capa-imagenes">
+    <div
+      class="slides-track"
+      [class.jumping]="isJumping()"
+      [class.paused]="isPaused()"
+      [style.--current-index]="currentIndex()"
+    >
+      @for (slide of slidesList(); track $index) {
+        <div class="slide-item" [ngClass]="{ active: $index === currentIndex() }">
+          <img [src]="slide.imageUrl" [alt]="slide.alt" loading="lazy" />
+
+          <button
+            class="a11y-pause-btn"
+            (click)="togglePause(); $event.stopPropagation()"
+            [attr.aria-label]="isPaused() ? 'Reproducir' : 'Pausar'"
+          >
+            @if (isPaused()) {
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+            } @else {
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            }
+          </button>
+
+          <div class="progress-container">
+            <div class="progress-line"></div>
+          </div>
+
+          <div class="ribbon-caption">
+            <span class="ribbon-number">{{ slide.numberText }}</span>
+            <span class="ribbon-text">{{ slide.caption }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="capa-degradado"></div>
+</div>

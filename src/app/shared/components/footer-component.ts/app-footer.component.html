@@ -1,17 +1,21 @@
 <footer class="main-footer">
   <div class="footer-container">
     <div class="footer-brand">
-      <span class="logo-text">Impulso Ciudadano BC</span>
+      <img src="/images/app-logo.png" alt="Logo PulsoCiudadano" class="footer-logo-img" />
     </div>
+
     <span class="copyright desktop-only">© 2026 Todos los derechos reservados.</span>
+
     <div class="footer-links">
-      <a routerLink="/privacidad">Privacidad</a>
+      <a routerLink="/privacy-agreement">Privacidad</a>
       <span class="dot">•</span>
-      <a routerLink="/terminos">Términos</a>
+      <a routerLink="/terms-conditions">Términos</a>
       <span class="dot">•</span>
-      <a routerLink="/contacto">Contacto</a>
+      <a (click)="openContact()">Contacto</a>
       <span class="dot">•</span>
-      <a routerLink="/contacto">Desarrollador</a>
+      <a href="https://www.linkedin.com/in/persi2711/" target="_blank" rel="noopener noreferrer"
+        >Desarrollador <mat-icon class="ext-icon">open_in_new</mat-icon></a
+      >
     </div>
   </div>
 </footer>

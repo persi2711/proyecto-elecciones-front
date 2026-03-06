@@ -149,7 +149,6 @@ export class FullRegisterFormComponent {
 
     if (isGoogle) {
       this.authService.setSession(token);
-      this.router.navigateByUrl('');
     } else {
       this.router.navigateByUrl(`/auth/full/confirm/${token}`);
     }

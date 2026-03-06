@@ -8,10 +8,6 @@ export const routes: Routes = [
     canActivate: [sessionInitializerGuard],
     children: [
       {
-        path: '',
-        loadChildren: () => import('./modules/main/main.routes').then((m) => m.MainRoutes),
-      },
-      {
         path: 'auth',
         loadChildren: () => import('./modules/auth/auth.routes').then((m) => m.AuthRoutes),
         canActivate: [guestGuard],
@@ -24,9 +20,15 @@ export const routes: Routes = [
       },
       {
         path: 'user',
-        loadChildren: () => import('./modules/user/user.routes').then((m) => m.MainRoutes),
+        loadChildren: () => import('./modules/user/user.routes').then((m) => m.UserRoutes),
         canActivate: [authGuard],
       },
+      {
+        path: '',
+
+        loadChildren: () => import('./modules/main/main.routes').then((m) => m.MainRoutes),
+      },
+      { path: '**', redirectTo: '' },
     ],
   },
 ];

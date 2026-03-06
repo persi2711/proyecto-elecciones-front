@@ -4,18 +4,26 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <div class="logo-area" routerLink="/">
-      <span class="logo-text">Impulso Ciudadano BC</span>
+    <div class="logo-area" routerLink="/home">
+      <img src="/images/app-logo.png" alt="Logo PulsoCiudadano" class="logo-img" />
     </div>
 
     <nav class="desktop-only nav-list">
       @for (link of layoutService.navRoutes(); track link.path) {
-        <a [routerLink]="link.path" routerLinkActive="active" class="nav-link">
-          {{ link.label }}
-          @if (link.label === 'Consejo Ciudadano') {
-            <mat-icon class="ext-icon">open_in_new</mat-icon>
-          }
-        </a>
+        @if (link.label === 'Consejo Ciudadano') {
+          <a
+            href="https://consejociudadanobc.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-link"
+          >
+            {{ link.label }} <mat-icon class="ext-icon">open_in_new</mat-icon></a
+          >
+        } @else {
+          <a [routerLink]="link.path" routerLinkActive="active" class="nav-link">
+            {{ link.label }}
+          </a>
+        }
       }
     </nav>
 
@@ -28,7 +36,7 @@
         @if (!isBrowser() || isChecking()) {
           <div class="user-skeleton animate-pulse"></div>
         } @else if (user()) {
-          <button mat-button class="user-pill" routerLink="/me">
+          <button mat-button class="user-pill" routerLink="/user/profile">
             <mat-icon>account_circle</mat-icon>
             <span class="desktop-only">{{ user().email }}</span>
           </button>

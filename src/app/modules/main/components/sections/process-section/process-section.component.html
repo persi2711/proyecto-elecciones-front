@@ -1,4 +1,4 @@
-<section class="process-section">
+<section id="proceso-registro" class="process-section">
   <div class="section-container">
     <div class="section-header">
       <span class="sub-badge">Pasos a seguir</span>
@@ -14,24 +14,27 @@
       </div>
 
       <div class="step-card">
-        <div class="step-icon"><mat-icon>how_to_reg</mat-icon></div>
+        <div class="step-icon"><mat-icon>lightbulb</mat-icon></div>
         <h3>Selecciona tu puesto</h3>
         <p>
-          Elige el cargo al que deseas postularte y completa el cuestionario de visión ciudadana.
+          Elige el en qué área crees que tu experiencia puede aportar soluciones reales para el
+          estado.
         </p>
       </div>
 
       <div class="step-card">
-        <div class="step-icon"><mat-icon>campaign</mat-icon></div>
+        <div class="step-icon"><mat-icon>verified</mat-icon></div>
         <h3>Suma apoyos</h3>
-        <p>Comparte tu perfil para recibir el respaldo y la validación de la ciudadanía en BC.</p>
+        <p>
+          Recibe el respaldo de quienes conocen tu labor y suma legitimidad ciudadana a tu perfil.
+        </p>
       </div>
     </div>
 
     <div class="process-actions">
       <div class="subtle-cta">
         <span>¿Listo para el siguiente paso?</span>
-        <button class="btn-text-link">
+        <button class="btn-text-link" (click)="navigateToLogin()">
           Crear mi cuenta ahora
           <mat-icon>chevron_right</mat-icon>
         </button>

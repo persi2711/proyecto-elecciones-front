@@ -67,7 +67,7 @@ export class LoginFormComponent {
           } else {
             this.authSerive.setSession(data.token);
             this.layoutService.success('Inicio de sesion exitoso');
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('/home');
           }
         },
         error: (error) => {
