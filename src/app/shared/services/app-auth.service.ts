@@ -33,6 +33,7 @@ export class AuthService {
         this.#currentUser.set(res.user);
         this.isChecking.set(false);
         this.#isLoaded = true;
+        this.router.navigateByUrl('/home');
       }),
       map(() => true),
       catchError(() => {

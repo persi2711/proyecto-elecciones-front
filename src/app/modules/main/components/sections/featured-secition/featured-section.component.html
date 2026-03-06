@@ -46,7 +46,7 @@
                 <p class="profile-bio">{{ user.bio }}</p>
 
                 <div class="impact-stats">
-                  <button class="subtle-action-btn">
+                  <button [routerLink]="'/participants/' + user.id" class="subtle-action-btn">
                     Conocer trayectoria
                     <mat-icon>arrow_forward</mat-icon>
                   </button>
@@ -62,7 +62,7 @@
               </div>
               <h3>Comunidad en Movimiento</h3>
               <p>Explora el directorio completo de ciudadanos comprometidos con Baja California.</p>
-              <button class="subtle-action-btn" routerLink="/representantes">
+              <button class="subtle-action-btn" routerLink="/participants">
                 Explorar lista completa
                 <mat-icon>arrow_forward</mat-icon>
               </button>
@@ -79,7 +79,7 @@
                 El liderazgo se construye día a día. Sigue trabajando duro por tu comunidad y muy
                 pronto podrías aparecer en este espacio.
               </p>
-              <button class="subtle-action-btn" routerLink="/representantes">
+              <button class="subtle-action-btn" routerLink="/participants">
                 <span>Buscar en todos los perfiles</span>
                 <mat-icon>search</mat-icon>
               </button>

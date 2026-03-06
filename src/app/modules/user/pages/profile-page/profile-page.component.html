@@ -1,0 +1,162 @@
+<main class="single-column-layout">
+  <section class="profile-header-img">
+    <div class="avatar-container">
+      <img [src]="userProfile().photo" alt="Foto de perfil" class="avatar" />
+
+      <div
+        class="status-indicator"
+        [class.private]="!userProfile().isPublic"
+        [matTooltip]="userProfile().isPublic ? 'Perfil visible para todos' : 'Perfil oculto'"
+      >
+        <mat-icon>{{ userProfile().isPublic ? 'public' : 'visibility_off' }}</mat-icon>
+      </div>
+
+      <button mat-mini-fab class="edit-photo-btn" (click)="editPhoto()">
+        <mat-icon>camera_alt</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <section class="profile-name-section">
+    <h1>{{ userProfile().name }} {{ userProfile().lastNameP }} {{ userProfile().lastNameM }}</h1>
+  </section>
+
+  <section class="toolbar-section">
+    <div class="toolbar-container">
+      <button mat-button class="tool-btn" (click)="openSettings()">
+        <mat-icon>settings</mat-icon> Configuración
+      </button>
+      <button mat-button class="tool-btn" (click)="togglePrivacy()">
+        <mat-icon>{{ userProfile().isPublic ? 'visibility_off' : 'visibility' }}</mat-icon>
+        {{ userProfile().isPublic ? 'Hacer Privado' : 'Hacer Público' }}
+      </button>
+      <button mat-button class="tool-btn logout" (click)="logout()">
+        <mat-icon>logout</mat-icon> Cerrar Sesión
+      </button>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-header">
+      <h2>Acerca de mí</h2>
+      <button mat-icon-button class="edit-btn" (click)="editDescription()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <p class="description-text">{{ userProfile().description }}</p>
+  </section>
+
+  <section class="split-section">
+    <div class="split-card">
+      <div class="section-header">
+        <h2>Contacto Público</h2>
+        <button mat-icon-button class="edit-btn" (click)="editContact()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <ul class="contact-list">
+        <li>
+          <mat-icon>language</mat-icon>
+          <span>{{ userProfile().publicContact.web || 'No especificado' }}</span>
+        </li>
+        <li>
+          <mat-icon>mail</mat-icon>
+          <span>{{ userProfile().publicContact.email || 'No especificado' }}</span>
+        </li>
+        <li>
+          <mat-icon>phone</mat-icon>
+          <span>{{ userProfile().publicContact.phone || 'No especificado' }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="split-card cv-card">
+      <div class="section-header">
+        <h2>Curriculum Vitae</h2>
+      </div>
+      <div class="cv-content">
+        <div class="cv-file">
+          <mat-icon>description</mat-icon>
+          <span>{{ userProfile().resource.cvDocument || 'Ningún archivo subido' }}</span>
+        </div>
+        <button mat-stroked-button class="blue-btn" (click)="editCV()">
+          <mat-icon>upload_file</mat-icon> Actualizar CV
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section tabs-section">
+    <div class="section-header">
+      <h2>Trayectoria</h2>
+    </div>
+
+    <mat-tab-group animationDuration="0ms" class="custom-tabs">
+      <mat-tab label="Social">
+        <div class="tab-content">
+          <button mat-button class="add-btn" (click)="addLifeWay('social')">
+            + Agregar experiencia social
+          </button>
+          @for (item of socialLifeWays(); track item.title) {
+            <div class="lifeway-card">
+              <div class="lw-head">
+                <h3>{{ item.title }}</h3>
+                <button mat-icon-button class="edit-btn"><mat-icon>edit</mat-icon></button>
+              </div>
+              <span class="lw-meta"
+                >{{ item.institution }} • {{ item.initDate }} - {{ item.finishDate }}</span
+              >
+              <p>{{ item.description }}</p>
+            </div>
+          } @empty {
+            <p class="empty-text">No hay trayectoria social registrada.</p>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Laboral">
+        <div class="tab-content">
+          <button mat-button class="add-btn" (click)="addLifeWay('laboral')">
+            + Agregar experiencia laboral
+          </button>
+          @for (item of laboralLifeWays(); track item.title) {
+            <div class="lifeway-card">
+              <div class="lw-head">
+                <h3>{{ item.title }}</h3>
+                <button mat-icon-button class="edit-btn"><mat-icon>edit</mat-icon></button>
+              </div>
+              <span class="lw-meta"
+                >{{ item.institution }} • {{ item.initDate }} - {{ item.finishDate }}</span
+              >
+              <p>{{ item.description }}</p>
+            </div>
+          } @empty {
+            <p class="empty-text">No hay trayectoria laboral registrada.</p>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Académica">
+        <div class="tab-content">
+          <button mat-button class="add-btn" (click)="addLifeWay('academica')">
+            + Agregar formación
+          </button>
+          @for (item of academicLifeWays(); track item.title) {
+            <div class="lifeway-card">
+              <div class="lw-head">
+                <h3>{{ item.title }}</h3>
+                <button mat-icon-button class="edit-btn"><mat-icon>edit</mat-icon></button>
+              </div>
+              <span class="lw-meta"
+                >{{ item.institution }} • {{ item.initDate }} - {{ item.finishDate }}</span
+              >
+              <p>{{ item.description }}</p>
+            </div>
+          } @empty {
+            <p class="empty-text">No hay formación académica registrada.</p>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+</main>

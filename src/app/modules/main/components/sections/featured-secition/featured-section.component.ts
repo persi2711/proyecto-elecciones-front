@@ -10,12 +10,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-featured-section',
   templateUrl: 'featured-section.component.html',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, RouterLink],
   styleUrls: ['featured-section.component.scss'],
 })
 export class FeaturedSectionComponent implements OnInit {

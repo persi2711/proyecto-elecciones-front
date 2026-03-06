@@ -43,7 +43,7 @@
                   </div>
                 </div>
 
-                <button class="btn-outline-primary">
+                <button [routerLink]="'/events/' + pos.id" class="btn-outline-primary">
                   Ver detalles del proceso
                   <mat-icon>arrow_forward</mat-icon>
                 </button>
@@ -60,7 +60,9 @@
               Actualmente estamos trabajando en nueva convocatorias. Te invitamos a mantenerte al
               pendiente y apoyar a los participantes activos.
             </p>
-            <button class="subtle-action-btn">Ver lista de participantes</button>
+            <button routerLink="/participants" class="subtle-action-btn">
+              Ver lista de participantes
+            </button>
           </div>
         }
       }
@@ -68,7 +70,7 @@
 
     @if (!loading() && positions().length > 0) {
       <div class="section-footer">
-        <button class="btn-link-all" routerLink="/convocatorias">
+        <button class="btn-link-all" routerLink="/events">
           <span>Ver historial de convocatorias</span>
           <mat-icon>apps</mat-icon>
         </button>
