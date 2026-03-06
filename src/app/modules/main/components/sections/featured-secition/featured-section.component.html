@@ -1,64 +1,115 @@
-<section class="featured-section">
-  <div class="section-container">
-    <div class="section-header">
-      <span class="sub-badge">Voces Locales</span>
-      <h2>Representantes destacados</h2>
-      <p>Ciudadanos que ya están haciendo la diferencia.</p>
-    </div>
+<section id="lista-representantes" class="spotlight-section">
+  <div class="section-header">
+    <span class="sub-badge">Voces Locales</span>
+    <h2>Representantes destacados</h2>
+    <p>Liderazgos ciudadanos con trayectoria real.</p>
+  </div>
 
-    <div class="carousel-wrapper">
-      <button class="nav-btn prev" (click)="scrollPrev()"><mat-icon>chevron_left</mat-icon></button>
-
-      <div
-        class="carousel-track"
-        #carouselTrack
-        (mouseenter)="stopAutoplay()"
-        (mouseleave)="startAutoplay()"
-      >
-        @if (loading()) {
-          @for (i of [1, 2, 3, 4]; track i) {
-            <div class="candidate-card skeleton">
-              <div class="card-img"></div>
-              <div class="card-info">
-                <div class="sk-line title"></div>
-                <div class="sk-line text"></div>
-                <div class="sk-line stats"></div>
-              </div>
+  <div class="spotlight-container">
+    <div class="spotlight-track" #carouselTrack (scroll)="onScroll($event)">
+      @if (loading()) {
+        @for (i of [1, 2]; track i) {
+          <div class="spotlight-item skeleton">
+            <div class="image-area"><div class="sk-portrait"></div></div>
+            <div class="content-area">
+              <div class="sk-line merit"></div>
+              <div class="sk-line title"></div>
+              <div class="sk-line bio"></div>
+              <div class="sk-footer"></div>
             </div>
-          }
-        } @else {
+          </div>
+        }
+      } @else {
+        @if (users().length > 0) {
           @for (user of users(); track user.id) {
-            <div class="candidate-card">
-              <div class="card-img">
-                <img [src]="user.photo" [alt]="user.name" />
-                <span class="location-badge">{{ user.city }}</span>
+            <div class="spotlight-item">
+              <div class="image-area">
+                <div class="portrait-frame">
+                  <img [src]="user.photo" [alt]="user.name" />
+                </div>
+                <div class="city-tag">{{ user.city }}</div>
               </div>
-              <div class="card-info">
-                <h4 class="text-truncate">{{ user.name }}</h4>
-                <p class="description-truncate">{{ user.bio }}</p>
-                <div class="card-stats">
-                  <mat-icon>favorite</mat-icon>
-                  <span>{{ user.votes }} Apoyos</span>
+
+              <div class="content-area">
+                <div class="merit-badge">
+                  <mat-icon>bookmark_check</mat-icon>
+                  <span>Trayectoria Comprobada</span>
+                </div>
+
+                <h3 class="name-header">
+                  {{ user.name }}
+                  <div class="stat-pill">
+                    <mat-icon>volunteer_activism</mat-icon>
+                    <span class="votes-text">{{ user.votes }}</span>
+                  </div>
+                </h3>
+                <p class="profile-bio">{{ user.bio }}</p>
+
+                <div class="impact-stats">
+                  <button class="subtle-action-btn">
+                    Conocer trayectoria
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
                 </div>
               </div>
             </div>
           }
 
-          <div class="candidate-card view-all-card" routerLink="/representantes">
-            <div class="view-all-content">
+          <div class="spotlight-item view-all-card">
+            <div class="cta-wrapper">
               <div class="icon-circle">
-                <mat-icon>group_add</mat-icon>
+                <mat-icon>groups</mat-icon>
               </div>
-              <h4>Ver todos los participantes</h4>
-              <p>Descubre a más ciudadanos comprometidos con Baja California.</p>
-              <span class="link-text">Explorar lista <mat-icon>arrow_forward</mat-icon></span>
+              <h3>Comunidad en Movimiento</h3>
+              <p>Explora el directorio completo de ciudadanos comprometidos con Baja California.</p>
+              <button class="subtle-action-btn" routerLink="/representantes">
+                Explorar lista completa
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        } @else {
+          <div class="spotlight-item empty-state-card">
+            <div class="cta-wrapper">
+              <div class="icon-circle secondary">
+                <mat-icon>auto_awesome</mat-icon>
+              </div>
+              <h3>Aún no hay miembros destacados</h3>
+              <p>
+                El liderazgo se construye día a día. Sigue trabajando duro por tu comunidad y muy
+                pronto podrías aparecer en este espacio.
+              </p>
+              <button class="subtle-action-btn" routerLink="/representantes">
+                <span>Buscar en todos los perfiles</span>
+                <mat-icon>search</mat-icon>
+              </button>
             </div>
           </div>
         }
-      </div>
-      <button class="nav-btn next" (click)="scrollNext()">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+      }
     </div>
+
+    @if (!loading() && users().length > 0) {
+      <div class="nav-controls">
+        <button class="nav-arrow-btn" (click)="scrollPrev()" aria-label="Anterior">
+          <mat-icon>west</mat-icon>
+        </button>
+
+        <div class="pagination-dots">
+          @for (u of users(); track u.id; let i = $index) {
+            <span class="dot" [class.active]="i === activeIndex()" (click)="goToIndex(i)"> </span>
+          }
+          <span
+            class="dot"
+            [class.active]="activeIndex() === users().length"
+            (click)="goToIndex(users().length)"
+          ></span>
+        </div>
+
+        <button class="nav-arrow-btn" (click)="scrollNext()" aria-label="Siguiente">
+          <mat-icon>east</mat-icon>
+        </button>
+      </div>
+    }
   </div>
 </section>

@@ -267,3 +267,99 @@
   margin-bottom: 8px;
   display: block;
 }
+
+.empty-positions-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba($primary-blue, 0.02);
+  border: 2px dashed #e2e8f0;
+  border-radius: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .empty-icon-box {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      color: #94a3b8;
+    }
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: $slate-dark;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $slate-text;
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .btn-outline-primary {
+    max-width: 280px;
+    // Reutilizamos tu estilo de botón ya definido arriba
+  }
+
+  @media (max-width: $mobile) {
+    padding: 40px 15px;
+    border-radius: 24px;
+
+    h3 {
+      font-size: 1.4rem;
+    }
+    p {
+      font-size: 0.95rem;
+    }
+  }
+}
+.subtle-action-btn {
+  background: rgba($primary-blue, 0.08);
+  color: $primary-blue;
+  border: 1px solid rgba($primary-blue, 0.2);
+  padding: 10px 22px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $primary-blue;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba($primary-blue, 0.2);
+  }
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+// Pequeño ajuste para el contenedor de contenido
+.positions-content {
+  min-height: 300px; // Evita saltos bruscos de altura al cargar
+}

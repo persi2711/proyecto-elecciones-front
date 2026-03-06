@@ -18,21 +18,20 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [CommonModule, MatIconModule],
   styleUrls: ['featured-section.component.scss'],
 })
-export class FeaturedSectionComponent implements OnInit, OnDestroy {
+export class FeaturedSectionComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
-
   private track = viewChild<ElementRef>('carouselTrack');
-  private autoplayInterval: any;
 
   loading = signal(true);
   users = signal<any[]>([]);
+  activeIndex = signal(0);
 
   ngOnInit() {
     this.loadCandidates();
-    this.initAutoplayLogic();
   }
 
   private loadCandidates() {
+    // Simulamos carga de Backend (2.5s para apreciar el skeleton)
     setTimeout(() => {
       this.users.set([
         {
@@ -40,7 +39,7 @@ export class FeaturedSectionComponent implements OnInit, OnDestroy {
           name: 'Juan Pérez',
           city: 'Tijuana',
           title: 'Activista Ambiental',
-          bio: 'Recuperando espacios verdes en la zona este desde hace 10 años.',
+          bio: 'Dedicado a la recuperación de espacios verdes y reforestación en la zona este de Tijuana, logrando transformar basureros clandestinos en parques para la comunidad.',
           votes: 450,
           photo:
             'https://media.istockphoto.com/id/1171169099/es/foto/hombre-con-brazos-cruzados-aislados-sobre-fondo-gris.jpg?s=612x612&w=0&k=20&c=8qDLKdLMm2i8DHXY6crX6a5omVh2IxqrOxJV2QGzgFg=',
@@ -50,85 +49,68 @@ export class FeaturedSectionComponent implements OnInit, OnDestroy {
           name: 'María Flores',
           city: 'Ensenada',
           title: 'Líder Comunitaria',
-          bio: 'Gestión de desayunos escolares para niños en zonas rurales.',
+          bio: 'Gestión de desayunos escolares para niños en zonas rurales de Ensenada y apoyo constante a madres trabajadoras mediante estancias infantiles autogestivas.',
           votes: 820,
           photo:
             'https://img.freepik.com/foto-gratis/estilo-vida-emociones-gente-concepto-casual-confiado-agradable-sonriente-mujer-asiatica-brazos-cruzados-pecho-seguro-listo-ayudar-escuchando-companeros-trabajo-participando-conversacion_1258-59335.jpg?semt=ais_hybrid&w=740&q=80',
         },
         {
           id: 3,
-          name: 'Juan Pérez',
-          city: 'Tijuana',
-          title: 'Activista Ambiental',
-          bio: 'Recuperando espacios verdes en la zona este desde hace 10 años.',
-          votes: 450,
-          photo:
-            'https://img.freepik.com/foto-gratis/joven-hombre-barbudo-camisa-rayas_273609-5677.jpg?semt=ais_rp_progressive&w=740&q=80',
-        },
-        {
-          id: 4,
-          name: 'Juan Pérez',
-          city: 'Tijuana',
-          title: 'Activista Ambiental',
-          bio: 'Recuperando espacios verdes en la zona este desde hace 10 años.',
-          votes: 450,
-          photo:
-            'https://media.istockphoto.com/id/1364917563/es/foto/hombre-de-negocios-sonriendo-con-los-brazos-cruzados-sobre-fondo-blanco.jpg?s=612x612&w=0&k=20&c=NqMHLF8T4RzPaBE_WMnflSGB_1-kZZTQgAkekUxumZg=',
-        },
-        {
-          id: 5,
-          name: 'Juan Pérez',
-          city: 'Tijuana',
-          title: 'Activista Ambiental',
-          bio: 'Recuperando espacios verdes en la zona este desde hace 10 años.',
-          votes: 450,
+          name: 'Carlos Mendoza',
+          city: 'Mexicali',
+          title: 'Gestor Social',
+          bio: 'Impulsor de programas de hidratación y refugios temporales para personas en situación de calle durante las olas de calor extremo en la capital del estado.',
+          votes: 310,
           photo:
             'https://img.freepik.com/foto-gratis/joven-hombre-barbudo-camisa-rayas_273609-5677.jpg?semt=ais_rp_progressive&w=740&q=80',
         },
       ]);
       this.loading.set(false);
-    }, 3000);
+    }, 2500);
   }
 
-  initAutoplayLogic() {
-    if (isPlatformBrowser(this.platformId) && window.innerWidth > 768) {
-      this.startAutoplay();
+  onScroll(event: Event) {
+    const el = event.target as HTMLElement;
+    // Usamos scrollLeft / clientWidth para obtener el índice exacto
+    const index = Math.round(el.scrollLeft / el.clientWidth);
+    if (this.activeIndex() !== index) {
+      this.activeIndex.set(index);
     }
   }
 
-  startAutoplay() {
-    if (this.autoplayInterval) return;
-
-    this.autoplayInterval = setInterval(() => {
-      const el = this.track()?.nativeElement;
-      if (el) {
-        const isAtEnd = el.scrollLeft + el.offsetWidth >= el.scrollWidth - 20;
-
-        if (isAtEnd) {
-          el.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          el.scrollBy({ left: 300, behavior: 'smooth' });
-        }
-      }
-    }, 4500);
-  }
-
-  stopAutoplay() {
-    if (this.autoplayInterval) {
-      clearInterval(this.autoplayInterval);
-      this.autoplayInterval = null;
+  goToIndex(index: number) {
+    const el = this.track()?.nativeElement;
+    if (el) {
+      el.scrollTo({
+        left: index * el.offsetWidth,
+        behavior: 'smooth',
+      });
+      this.activeIndex.set(index);
     }
   }
 
-  ngOnDestroy() {
-    this.stopAutoplay();
-  }
-
+  // NAVEGACIÓN CIRCULAR
   scrollNext() {
-    this.track()?.nativeElement.scrollBy({ left: 300, behavior: 'smooth' });
+    // El total es la longitud de la lista de usuarios + 1 (tarjeta "Ver todos")
+    const totalItems = this.users().length + 1;
+    const next = this.activeIndex() + 1;
+
+    if (next < totalItems) {
+      this.goToIndex(next);
+    } else {
+      this.goToIndex(0); // Regresa al primer perfil
+    }
   }
 
   scrollPrev() {
-    this.track()?.nativeElement.scrollBy({ left: -300, behavior: 'smooth' });
+    const totalItems = this.users().length + 1;
+    const prev = this.activeIndex() - 1;
+
+    if (prev >= 0) {
+      this.goToIndex(prev);
+    } else {
+      // Si estamos en el primero y damos atrás, salta a la tarjeta "Ver todos"
+      this.goToIndex(totalItems - 1);
+    }
   }
 }

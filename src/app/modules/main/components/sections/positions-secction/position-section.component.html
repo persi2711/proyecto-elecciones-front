@@ -3,56 +3,76 @@
     <div class="section-header">
       <span class="sub-badge">Tu Momento</span>
       <h2>Convocatorias de Postulación</h2>
-      <p>Selecciona el cargo al que deseas postularte.</p>
+      <p>Selecciona el área donde tu trayectoria ciudadana pueda generar impacto.</p>
     </div>
 
-    <div class="positions-grid">
+    <div class="positions-content">
       @if (loading()) {
-        @for (i of [1, 2, 3]; track i) {
-          <div class="position-card skeleton">
-            <div class="sk-icon"></div>
-            <div class="sk-title"></div>
-            <div class="sk-subtitle"></div>
-            <div class="sk-description"></div>
-            <div class="sk-dates"></div>
-            <div class="sk-button"></div>
-          </div>
-        }
+        <div class="positions-grid">
+          @for (i of [1, 2, 3]; track i) {
+            <div class="position-card skeleton">
+              <div class="sk-icon"></div>
+              <div class="sk-title"></div>
+              <div class="sk-subtitle"></div>
+              <div class="sk-description"></div>
+              <div class="sk-dates"></div>
+              <div class="sk-button"></div>
+            </div>
+          }
+        </div>
       } @else {
-        @for (pos of positions(); track pos.id) {
-          <div class="position-card">
-            <div class="pos-icon-container">
-              <mat-icon>{{ pos.iconName }}</mat-icon>
-            </div>
-            <h3>{{ pos.title }}</h3>
-            <span class="location">{{ pos.location }}</span>
-            <p class="description">{{ pos.description }}</p>
+        @if (positions().length > 0) {
+          <div class="positions-grid">
+            @for (pos of positions(); track pos.id) {
+              <div class="position-card">
+                <div class="pos-icon-container">
+                  <mat-icon>{{ pos.iconName }}</mat-icon>
+                </div>
+                <h3>{{ pos.title }}</h3>
+                <span class="location">{{ pos.location }}</span>
+                <p class="description">{{ pos.description }}</p>
 
-            <div class="pos-dates">
-              <div class="date-item">
-                <mat-icon>event_available</mat-icon>
-                <span><strong>Cierre:</strong> {{ pos.limitDate }}</span>
-              </div>
-              <div class="date-item">
-                <mat-icon>timer</mat-icon>
-                <span><strong>Finalización:</strong> {{ pos.endDate }}</span>
-              </div>
-            </div>
+                <div class="pos-dates">
+                  <div class="date-item">
+                    <mat-icon>event_available</mat-icon>
+                    <span><strong>Cierre:</strong> {{ pos.limitDate }}</span>
+                  </div>
+                  <div class="date-item">
+                    <mat-icon>timer</mat-icon>
+                    <span><strong>Validación:</strong> {{ pos.endDate }}</span>
+                  </div>
+                </div>
 
-            <button class="btn-outline-primary">
-              Ver detalles del puesto
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
+                <button class="btn-outline-primary">
+                  Ver detalles del proceso
+                  <mat-icon>arrow_forward</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="empty-positions-state">
+            <div class="empty-icon-box">
+              <mat-icon>event_busy</mat-icon>
+            </div>
+            <h3>Próximas convocatorias en camino</h3>
+            <p>
+              Actualmente estamos trabajando en nueva convocatorias. Te invitamos a mantenerte al
+              pendiente y apoyar a los participantes activos.
+            </p>
+            <button class="subtle-action-btn">Ver lista de participantes</button>
           </div>
         }
       }
     </div>
 
-    <div class="section-footer">
-      <button class="btn-link-all" routerLink="/convocatorias">
-        <span>Ver todas las convocatorias vigentes</span>
-        <mat-icon>apps</mat-icon>
-      </button>
-    </div>
+    @if (!loading() && positions().length > 0) {
+      <div class="section-footer">
+        <button class="btn-link-all" routerLink="/convocatorias">
+          <span>Ver historial de convocatorias</span>
+          <mat-icon>apps</mat-icon>
+        </button>
+      </div>
+    }
   </div>
 </section>

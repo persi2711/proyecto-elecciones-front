@@ -18,6 +18,35 @@
       gap: 40px;
     }
   }
+  .learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: $primary-blue;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid rgba($primary-blue, 0.1);
+    padding-bottom: 4px;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: darken($primary-blue, 10%);
+      border-bottom-color: $primary-blue;
+
+      mat-icon {
+        transform: translateX(5px);
+      }
+    }
+  }
 
   .about-text {
     .sub-title {

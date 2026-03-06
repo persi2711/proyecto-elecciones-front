@@ -14,35 +14,7 @@ export class PositionSectionComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.positions.set([
-        {
-          id: 1,
-          iconName: 'account_balance',
-          title: 'Presidencia Municipal',
-          location: 'Tijuana, BC',
-          description: 'Lidera la administración local y propone soluciones ciudadanas.',
-          limitDate: '20 Abril',
-          endDate: '05 Mayo',
-        },
-        {
-          id: 2,
-          iconName: 'account_balance',
-          title: 'Presidencia Municipal',
-          location: 'Tijuana, BC',
-          description: 'Lidera la administración local y propone soluciones ciudadanas.',
-          limitDate: '20 Abril',
-          endDate: '05 Mayo',
-        },
-        {
-          id: 3,
-          iconName: 'account_balance',
-          title: 'Presidencia Municipal',
-          location: 'Tijuana, BC',
-          description: 'Lidera la administración local y propone soluciones ciudadanas.',
-          limitDate: '20 Abril',
-          endDate: '05 Mayo',
-        },
-      ]);
+      this.positions.set([]);
       this.loading.set(false);
     }, 2500);
   }

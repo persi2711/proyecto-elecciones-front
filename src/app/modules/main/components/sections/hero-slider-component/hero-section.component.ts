@@ -10,4 +10,15 @@ import { isPlatformBrowser } from '@angular/common';
   templateUrl: 'hero-section.component.html',
   styleUrls: ['hero-section.component.scss'],
 })
-export class HeroSectionComponent {}
+export class HeroSectionComponent {
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth', // El scroll será fluido, no de golpe
+        block: 'start', // Alinea al inicio de la sección
+        inline: 'nearest',
+      });
+    }
+  }
+}

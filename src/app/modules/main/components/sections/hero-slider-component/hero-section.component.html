@@ -3,8 +3,13 @@
     <app-hero-info class="info-content-side"></app-hero-info>
 
     <div class="action-buttons">
-      <button class="btn-primary">Quiero ser Representante</button>
-      <button class="btn-outline">Ver Postulados</button>
+      <button class="btn-primary" (click)="scrollToSection('proceso-registro')">
+        Quiero ser Representante
+      </button>
+
+      <button class="btn-outline" (click)="scrollToSection('lista-representantes')">
+        Ver Representantes
+      </button>
     </div>
   </div>
 
